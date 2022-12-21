@@ -4,6 +4,7 @@ const { User } = require("../db.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+
 router.post("/", async (req, res, next) => {
   const { email, password } = req.body;
 

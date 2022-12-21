@@ -42,6 +42,12 @@ import {
 
 const baseURL = "http://localhost:3001/";
 
+export function setOnline(conectados){
+    return function(dispatch){
+      dispatch({type:SET_CONECTED,payload:conectados})
+    }
+  }
+  
 export function getUserDetail(id, type = GET_USER_DETAIL) {
     return async function (dispatch) {
       dispatch({ type: LOADING });
@@ -62,7 +68,7 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
             payload: u.data,
           });
         })
-        .catch((err) => {});
+        .catch((err) => console.log(err));
     };
   }
   

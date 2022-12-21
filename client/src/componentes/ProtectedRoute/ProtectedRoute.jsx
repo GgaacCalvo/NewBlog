@@ -9,16 +9,20 @@ import { useEffect } from "react";
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
+  const userDetail = useSelector((state) => state.user);
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(
-        createUser({
-          ID: user.sub,
-          email: user.email,
-          img: user.picture,
-        })
-      );
+      dispatch(getUserId(user.sub));
+      if (userDetail.message) {
+        dispatch(
+          createUser({
+            ID: user.sub,
+            email: user.email,
+            img: user.picture,
+          })
+        );
+      }
     }
   }, [dispatch, isAuthenticated]);
 

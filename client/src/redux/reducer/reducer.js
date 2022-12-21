@@ -101,17 +101,14 @@ const localStorageAuth = () => {
             chat: action.payload,
           };
           case GET_USERS:
-      let onlyUser = action.payload.filter((el) => el.Worker === null);
       return {
         ...state,
         users: action.payload,
-        newUser: action.payload,
-        onlyUser: onlyUser,
       };
       case GET_USERNAME:
       return {
         ...state,
-        users: action.payload,
+        user: action.payload,
       };
     case POST_USER:
       return {
@@ -143,7 +140,7 @@ const localStorageAuth = () => {
       case GET_USER_ID:
         return {
           ...state,
-          users: action.payload,
+         
           user: action.payload,
         };
       case PUT_USER: {
