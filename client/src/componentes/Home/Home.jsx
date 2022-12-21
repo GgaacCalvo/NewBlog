@@ -8,7 +8,7 @@ export const Home = () => {
   return (
     <>
       <NavBar />
-      {isAuthenticated ? <Profile /> : <h1>Si te logeas hay mas</h1>}
+      {isAuthenticated ? <Profile /> : <h1>hy mas si te logeas</h1>}
       <Loading />
     </>
   );
