@@ -36,6 +36,7 @@ module.exports = (sequelize) => {
       isOnline: {
         type: DataTypes.BOOLEAN,
       },
+     
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,

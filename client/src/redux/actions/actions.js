@@ -1,20 +1,55 @@
 import axios from "axios";
+import {
+    DELETED_FAVORITE,
+    ADD_FAVORITE,
+    AGREGAR_SOCKET,
+    PUT_WORKER,
+    PUT_WORKER_PREMIUM,
+    PAY,
+    LOADING,
+    GET_WORKER_CONTRACTS,
+    GET_USERS_CONTRACTS,
+    GET_USER_DETAIL,
+    GET_WORKER_DETAIL,
+    GET_WORKERS_PREMIUM,
+    GET_WORKERS,
+    GET_JOBS,
+    GET_USERS,
+    GET_USERNAME,
+    POST_USER,
+    LOGIN_SUCCES,
+    GET_WORKERS_SEARCH,
+    ORDER_BY_RATING,
+    FILTER,
+    RESET,
+    TEMPORAL_LOGOUT,
+    PUT_USER,
+    GET_USER_ID,
+    GET_COUNTRIES,
+    UPLOAD_IMAGE,
+    CLEAN_DETAIL,
+    POST_COUNTRY,
+    POST_JOB,
+    DELETE_USER,
+    DELETE_JOB,
+    DELETE_COUNTRY,
+    GET_CHATS,
+    GET_CHAT_BY_PK,
+    SET_CONECTED,
+    GET_CHAT_BY_USERS
+  } from "./actions_vars";
 
 
-
+const baseURL = "http://localhost:3001/";
 
 export function getUserDetail(id, type = GET_USER_DETAIL) {
-    return function (dispatch) {
+    return async function (dispatch) {
       dispatch({ type: LOADING });
   
-      return fetch(baseURL + "users/" + id)
-        .then((data) => {
-          return data.json();
-        })
-        .then((json) => {
-          dispatch({ type: type, payload: json });
-          return json;
-        });
+      const data = await fetch(baseURL + "users/" + id);
+        const json = await data.json();
+        dispatch({ type: type, payload: json });
+        return json;
     };
   }
   export function getUserId(id) {
@@ -44,45 +79,6 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
         .catch((err) => {});
     };
   }
-  export function getChats(id) {
-    return function (dispatch) {
-      axios
-        .get(baseURL + "chat/" + id)
-        .then((chat) => {
-          dispatch({
-            type: GET_CHATS,
-            payload: chat.data,
-          });
-        })
-        .catch((err) => {console.log(err.message)});
-    };
-  }
-  export function getChatByPk(id) {
-    return function (dispatch) {
-      axios
-        .get(baseURL + "chat/?id=" + id)
-        .then((chat) => {
-          dispatch({
-            type: GET_CHAT_BY_PK,
-            payload: chat.data,
-          });
-        })
-        .catch((err) => {console.log(err.message)});
-    };
-  }
-  export function getChatByUsers(idparam, idsub) {
-    return function (dispatch) {
-      axios
-        .get(baseURL + "chat/?idparam=" + idparam+ "&idsub=" + idsub)
-        .then((chat) => {
-          dispatch({
-            type: GET_CHAT_BY_USERS,
-            payload: chat.data,
-          });
-        })
-        .catch((err) => {console.log(err.message)});
-    };
-  }
   
   export function getUsersName(search) {
     return function (dispatch) {
@@ -96,18 +92,11 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
   }
 
 
-  export function createUser(payload, jobs) {
+  export function createUser(payload) {
     return async function (dispatch) {
-      const user = await axios.post(baseURL + "users", payload);
-      const user_id = await user.data.ID;
-      if (jobs.length) {
-        const worker = {
-          user_id,
-          jobs,
-        };
-        const res = await axios.post(baseURL + "worker", worker);
-      }
-  
+      const user = await axios.post("http://localhost:3001/users", payload);
+    //   const user_id = await user.data.ID;
+        
       dispatch({
         type: POST_USER,
       });
@@ -146,9 +135,9 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
   
   export function finishUserCreation(id, data, jobs) {
     return async function (dispatch) {
-      const { name, lastName, phone, dni, location, city, street, address } =
+      const { name, lastName, city, street, address } =
         data;
-  
+        const location = "Argentina";
       const coordinate = await axios.get(
         `https://nominatim.openstreetmap.org/search?q=${address},${street},${city},${location}&format=json`
       );
@@ -159,24 +148,14 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
         const toSend = {
           name,
           lastName,
-          phone,
-          dni,
           city,
           street,
           address,
-          location,
           coordinates: [coordinate.data[0].lat, coordinate.data[0].lon],
           onBoarded: true,
         };
         const user = await axios.put(baseURL+`users/${id}`, toSend);
   
-        if (jobs.length) {
-          const worker = {
-            user_id: id,
-            jobs,
-          };
-          const res = await axios.post(baseURL+"worker", worker);
-        }
         dispatch({
           type: POST_USER,
         });

@@ -171,12 +171,18 @@ const {
   router.post("/", async (req, res, next) => {
     const { ID, email, img } = req.body;
     try {
-      let user = await User.create({
+      let exist = await User.findOne({ where: { ID: ID } });
+      if(!exist){
+        let user = await User.create({
         ID,
         email,
         img,
       });
       res.status(200).json(user); // para agarrar el id de usuario al crearlo
+      } else {
+        res.status(200).json(exist)
+      }
+      
     } catch (error) {
       next(error);
     }

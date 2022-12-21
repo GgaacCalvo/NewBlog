@@ -4,12 +4,18 @@ import './App.css';
 import { Home } from "./componentes/Home/Home";
 import { Landing } from "./componentes/Landing/Landing";
 import { Log } from './componentes/Login/Log'
+import ProtectedRoute from "./componentes/ProtectedRoute/ProtectedRoute";
 function App() {
   return (
     <div className="App">
       <Routes>
+
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Landing />
+          </ProtectedRoute>
+        } />
         <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Landing />} />
       </Routes>
       
     </div>
