@@ -35,6 +35,7 @@ const {
         isAdmin: u.isAdmin,
         img: u.img,
         email: u.email,
+        description: u.description,
         password: u.password,
         Chats: u.Chats,
         address: u.address,
@@ -93,6 +94,10 @@ const {
   
           })
         : "no updatie el img";
+      info.description ? await updatedUser.update({
+        description: info.description,
+      }) 
+      : "no updatie la description";
       info.isOnline
         ? await updatedUser.update({
             isOnline: info.isOnline,

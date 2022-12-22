@@ -16,11 +16,12 @@ import { LogIn } from "./LogIn";
 import { LogOut } from "./LogOut";
 import { Profile } from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Log = () => {
   const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
-
+  const userOn = useSelector((state) => state.user);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -66,9 +67,11 @@ export const Log = () => {
           <MenuItem onClick={handleCloseUserMenu}>
             <Typography textAlign="center">Account</Typography>
           </MenuItem>
-          <MenuItem onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">Dashboard</Typography>
-          </MenuItem>
+          {userOn.isAdmin && (
+            <MenuItem onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Dashboard</Typography>
+            </MenuItem>
+          )}
           <MenuItem
             onClick={() => logout({ returnTo: window.location.origin })}
           >
