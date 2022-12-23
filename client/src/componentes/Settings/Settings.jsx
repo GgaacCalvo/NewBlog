@@ -17,7 +17,6 @@ export const Settings = () => {
   const userOn = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [input, setInput] = useState({
-    id: userOn.id,
     name: userOn.name,
     lastName: userOn.lastName,
     img: userOn.img,
@@ -29,19 +28,23 @@ export const Settings = () => {
   });
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(getUserId(user));
+      console.log(user.sub);
+      dispatch(getUserId(user.sub));
+      console.log(userOn);
     }
-  }, [dispatch]);
+  }, [dispatch, isAuthenticated]);
   function handleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(updateUser(input, input.id));
+  const handleCancel = () => {
+    window.location.replace(`/home`);
+  };
+  const handleSubmit = () => {
+    console.log(input);
+    dispatch(updateUser(input, userOn.id));
   };
   return (
     <div class="container">
@@ -53,7 +56,7 @@ export const Settings = () => {
                 <div class="user-profile">
                   <div class="user-avatar">
                     <img
-                      src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                      src={userOn.img}
                       alt="https://bootdey.com/img/Content/avatar/avatar1.png"
                     />
                   </div>
@@ -99,9 +102,9 @@ export const Settings = () => {
                     <input
                       type="text"
                       class="form-control"
-                      id="lastname"
-                      placeholder={userOn.lastname}
-                      name="lastname"
+                      id="lastName"
+                      placeholder={userOn.lastName}
+                      name="lastName"
                       value={input.lastName}
                       /* defaultValue={user.phone}  */
                       onChange={handleChange}
@@ -119,8 +122,6 @@ export const Settings = () => {
                       placeholder={userOn.email}
                       name="email"
                       value={input.email}
-                      /* defaultValue={user.phone}  */
-                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -156,7 +157,7 @@ export const Settings = () => {
                 </div>
               </div>
               <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 tittl">
                   <h6 class="mb-3 text-primary">Address</h6>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -166,7 +167,11 @@ export const Settings = () => {
                       type="name"
                       class="form-control"
                       id="Street"
-                      placeholder="Enter Street"
+                      placeholder={userOn.street}
+                      name="street"
+                      value={input.street}
+                      /* defaultValue={user.phone}  */
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -177,7 +182,11 @@ export const Settings = () => {
                       type="text"
                       class="form-control"
                       id="address"
-                      placeholder="Enter Address"
+                      placeholder={userOn.address}
+                      name="address"
+                      value={input.address}
+                      /* defaultValue={user.phone}  */
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -188,19 +197,24 @@ export const Settings = () => {
                       type="name"
                       class="form-control"
                       id="ciTy"
-                      placeholder="Enter City"
+                      placeholder={userOn.city}
+                      name="city"
+                      value={input.city}
+                      /* defaultValue={user.phone}  */
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
               </div>
               <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="text-right">
+                  <div class="text-right tittl">
                     <button
                       type="button"
                       id="submit"
                       name="submit"
                       class="btn btn-secondary"
+                      onClick={() => handleCancel()}
                     >
                       Cancel
                     </button>

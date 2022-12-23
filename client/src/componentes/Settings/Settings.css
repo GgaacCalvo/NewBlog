@@ -2,6 +2,7 @@ body{margin-top:20px;
 color: #bcd0f7;
     background: #fff;
 }
+
 .account-settings .user-profile {
     margin: 0 0 1rem 0;
     padding-bottom: 1rem;
@@ -9,10 +10,13 @@ color: #bcd0f7;
 }
 .account-settings .user-profile .user-avatar {
     margin: 0 0 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .account-settings .user-profile .user-avatar img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
@@ -31,12 +35,15 @@ color: #bcd0f7;
     text-align: center;
 }
 .card {
-    background: #272E48;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 0;
+    background: rgba(110, 83, 83, 0.45);
+   
     margin-bottom: 1rem;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 6.5px );
+-webkit-backdrop-filter: blur( 6.5px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+
 }
 .form-control {
     border: 1px solid #596280;
@@ -44,6 +51,31 @@ color: #bcd0f7;
     -moz-border-radius: 2px;
     border-radius: 2px;
     font-size: .825rem;
-    background: #1A233A;
+    background: #ffffff;
     color: #bcd0f7;
+}
+.effect{
+    background: rgba( 255, 255, 255, 0.45 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 6.5px );
+-webkit-backdrop-filter: blur( 6.5px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+
+}
+label{
+    color: black;
+}
+p{
+    color: black;
+}
+h5{
+    color: black;
+}
+h6{
+    color: black;
+}
+.tittl{
+    margin-top: 2rem;
 }
