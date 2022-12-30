@@ -37,6 +37,7 @@ import {
     GET_CHAT_BY_PK,
     SET_CONECTED,
     GET_CHAT_BY_USERS,
+    GET_USER_SEARCH,
   } from "../actions/actions_vars";
 
 
@@ -59,6 +60,7 @@ const localStorageAuth = () => {
     chats: [],
     chat: {},
     onlineUsers: [],
+    userSearch: []
   };
 
   const reducer = (state = initialState, action) => {
@@ -125,6 +127,12 @@ const localStorageAuth = () => {
         ...state,
         authState,
       };
+      case GET_USER_SEARCH:{
+        return {
+          ...state,
+          userSearch: action.payload,
+        }
+      }
       case TEMPORAL_LOGOUT: {
         const authState = {
           isLoggedIn: false,

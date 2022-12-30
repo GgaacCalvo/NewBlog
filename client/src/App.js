@@ -17,8 +17,15 @@ function App() {
             <Landing />
           </ProtectedRoute>
         } />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profileuser" element={<ProfileUser/>} />
+        <Route path="/home" element={
+          <ProtectedRoute>
+
+            <Home />
+          </ProtectedRoute>
+        } />
+        <Route path="/profileuser" element={
+        <ProfileUser/>
+        } />
         <Route path="/settings" element={
        
           <Settings />

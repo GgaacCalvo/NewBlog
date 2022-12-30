@@ -111,3 +111,21 @@
   transform: translateY(-100%);
   transition: all 0.3s 1s ease-out;
 }
+
+.googsearch{
+  position: absolute;
+  z-index: 10;
+  width: 20rem;
+  right: 2%;
+  top: 10%;
+  color: black;
+  margin-top: 1rem;
+  background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 11.5px );
+-webkit-backdrop-filter: blur( 11.5px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+  padding: 1rem;
+  
+}

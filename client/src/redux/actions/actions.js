@@ -36,7 +36,8 @@ import {
     GET_CHATS,
     GET_CHAT_BY_PK,
     SET_CONECTED,
-    GET_CHAT_BY_USERS
+    GET_CHAT_BY_USERS,
+    GET_USER_SEARCH,
   } from "./actions_vars";
 
 
@@ -71,7 +72,17 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
         .catch((err) => console.log(err));
     };
   }
-  
+  export function getUserSearch(search) {
+   
+    return function (dispatch) {
+      axios.get(baseURL + "users?name=" + search).then((u) =>
+        dispatch({
+          type: GET_USER_SEARCH,
+          payload: u.data,
+        })
+      );
+    }.catch((err) => console.log(err));
+  }
   export function getUsers() {
     return function (dispatch) {
       axios

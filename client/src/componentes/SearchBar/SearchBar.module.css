@@ -1,0 +1,12 @@
+.search {
+  display: flex;
+  margin-top: 3.5%;
+}
+
+.search fieldset {
+  width: 415px;
+}
+
+.search button {
+  height: 52.5px;
+}
