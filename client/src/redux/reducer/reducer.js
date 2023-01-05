@@ -60,7 +60,8 @@ const localStorageAuth = () => {
     chats: [],
     chat: {},
     onlineUsers: [],
-    userSearch: []
+    userSearch: [],
+    socket: null,
   };
 
   const reducer = (state = initialState, action) => {
@@ -75,6 +76,21 @@ const localStorageAuth = () => {
         ...state,
         user: action.payload,
       };
+      case GET_CHATS:
+      return {
+        ...state,
+        chats: action.payload,
+      };
+    case GET_CHAT_BY_PK:
+      return {
+        ...state,
+        chat: action.payload,
+      };
+      case GET_CHAT_BY_USERS:
+        return {
+          ...state,
+          chat: action.payload,
+        };
       case GET_USER_DETAIL:
       return {
         ...state,

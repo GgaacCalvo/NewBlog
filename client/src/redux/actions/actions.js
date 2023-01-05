@@ -150,7 +150,7 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
     };
   }
   
-  export function finishUserCreation(id, data, jobs) {
+  export function finishUserCreation(id, data) {
     return async function (dispatch) {
       const { name, lastName, city, street, address } =
         data;
@@ -169,7 +169,7 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
           street,
           address,
           coordinates: [coordinate.data[0].lat, coordinate.data[0].lon],
-          onBoarded: true,
+          
         };
         const user = await axios.put(baseURL+`users/${id}`, toSend);
   
@@ -202,5 +202,44 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
         dispatch({ type: DELETE_USER });
       } catch (error) {
       }
+    };
+  }
+  export function getChats(id) {
+    return function (dispatch) {
+      axios
+        .get(baseURL + "chat/" + id)
+        .then((chat) => {
+          dispatch({
+            type: GET_CHATS,
+            payload: chat.data,
+          });
+        })
+        .catch((err) => {console.log(err.message)});
+    };
+  }
+  export function getChatByPk(id) {
+    return function (dispatch) {
+      axios
+        .get(baseURL + "chat/?id=" + id)
+        .then((chat) => {
+          dispatch({
+            type: GET_CHAT_BY_PK,
+            payload: chat.data,
+          });
+        })
+        .catch((err) => {console.log(err.message)});
+    };
+  }
+  export function getChatByUsers(idparam, idsub) {
+    return function (dispatch) {
+      axios
+        .get(baseURL + "chat/?idparam=" + idparam+ "&idsub=" + idsub)
+        .then((chat) => {
+          dispatch({
+            type: GET_CHAT_BY_USERS,
+            payload: chat.data,
+          });
+        })
+        .catch((err) => {console.log(err.message)});
     };
   }
