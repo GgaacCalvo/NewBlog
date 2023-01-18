@@ -34,7 +34,7 @@ export const SearchBar = () => {
         >
           <TextField
             id="standard-basic"
-            label="Buscar un oficio o nombre de trabajador"
+            label="Buscar nombre de usuario"
             type="text"
             variant="outlined"
             fullWidth
@@ -51,6 +51,13 @@ export const SearchBar = () => {
           </Button>
         </Box>
       </form>
+      <div>
+        <ul>
+          {users.map((e) => {
+            <li>{e.name}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 };

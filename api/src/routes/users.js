@@ -57,11 +57,14 @@ const {
   router.get("/", async (req, res, next) => {
     const { name } = req.query;
     const users = await getUsers();
+    console.log("Hola")
     try {
       if (!name) {
         res.send(users);
       } else {
-        const userName = filterItems(users, name);
+        console.log("Hola2")
+        const userName = await filterItems(users, name);
+        console.log("Hola3")
         userName.length > 0
           ? res.status(200).send(userName)
           : res.status(404).send({ message: "El usuario no existe" }); // aca deberia mandar

@@ -80,8 +80,8 @@ export function getUserDetail(id, type = GET_USER_DETAIL) {
           type: GET_USER_SEARCH,
           payload: u.data,
         })
-      );
-    }.catch((err) => console.log(err));
+      ).catch((err) => console.log(err));
+    }
   }
   export function getUsers() {
     return function (dispatch) {
